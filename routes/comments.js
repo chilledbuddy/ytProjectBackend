@@ -9,6 +9,17 @@ const router = express.Router();
 router.post('/analyze', async (req, res) => {
   const { videoLink } = req.body;
 
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Or '*' for all origins
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+  // If it's a preflight request (OPTIONS method), send a quick response
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   // Check if the videoLink is provided
   if (!videoLink) {
     return res.status(400).json({ message: 'No video link provided' });
@@ -82,6 +93,18 @@ router.post('/analyze', async (req, res) => {
 
 // GET /sentiment-summary - Aggregates sentiment data
 router.get('/sentiment-summary', async (req, res) => {
+
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Or '*' for all origins
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+  // If it's a preflight request (OPTIONS method), send a quick response
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   try {
     const sentimentData = await Comment.aggregate([
       {
