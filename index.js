@@ -7,7 +7,16 @@ const commentRoutes = require('./routes/comments');
 
 dotenv.config();
 const app = express();
-app.use(cors({origin: '*',}));
+
+
+const corsOptions = {
+  origin: '*',  // Allow requests from any origin
+  methods: ['GET', 'POST'],  // Allowed HTTP methods
+  allowedHeaders: ['Content-Type'],  // Allowed request headers
+};
+
+app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 
 // mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
