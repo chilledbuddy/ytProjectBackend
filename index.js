@@ -2,23 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const cors = require('cors');
 const commentRoutes = require('./routes/comments');
 
 dotenv.config();
 const app = express();
-
-
-const corsOptions = {
-  origin: 'http://localhost:3000',  // Allow requests from any origin
-  methods: ['GET', 'POST', 'OPTION'],  // Allowed HTTP methods
-  allowedHeaders: ['Content-Type'],  // Allowed request headers
-};
-// Allow preflight requests (OPTIONS method)
-app.options('*', cors(corsOptions));
-
-
-app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
